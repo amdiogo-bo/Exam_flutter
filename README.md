@@ -1,164 +1,213 @@
-# 🌤 Exam_flutter — Application Flutter Météo Mondiale
+Exam Flutter — Application Météo Mondiale
 
-Application Flutter complète de météo avec appels API en temps réel, animations, carte interactive et mode sombre/clair.
+Examen Développement Mobile – L3GL ISI 2026
 
----
+👨‍💻 Membres du groupe :
 
-## 📱  Les membres du groupe : Amadou Diogo Ba & Mamadou François Toure & Awa Ndao
+Amadou Diogo Ba
 
----
+Mamadou François Touré
 
-## 📱 Fonctionnalités
+Awa Ndao
 
-- **4 écrans** : Splash, Chargement, Résultats, Détail ville
-- **Jauge animée** avec changement de couleur rouge → orange → vert
-- **Appels API parallèles** vers OpenWeatherMap pour 5 villes
-- **Carte Google Maps** avec marqueur personnalisé
-- **Mode sombre/clair** avec bascule instantanée
-- **Gestion d'erreurs complète** avec messages et bouton retry
-- **Animations fluides** : FadeIn, SlideUp, Hero, Staggered list
-- **Architecture MVVM + Clean** avec Riverpod
+🎯 Présentation du Projet
 
----
+Dans le cadre de l’examen de Développement Mobile, nous avons réalisé une application Flutter complète permettant de consulter des données météo en temps réel pour plusieurs villes du monde.
 
-## 🚀 Installation
+L’objectif était de créer une application moderne, fluide et bien structurée, intégrant :
 
-### 1. Cloner le projet
+Des appels API en temps réel
 
-```bash
+Une jauge de progression animée
+
+Une carte interactive Google Maps
+
+Un mode sombre / clair
+
+Une gestion propre des erreurs
+
+Une architecture propre et organisée
+
+📱 Description Fonctionnelle
+1️⃣ Écran d’accueil (Splash Screen)
+
+Lorsque l’utilisateur lance l’application :
+
+Un message d’accueil s’affiche.
+
+Une animation d’introduction rend l’expérience plus agréable.
+
+Un bouton permet de démarrer l’expérience.
+
+L’objectif est d’offrir une première impression moderne et professionnelle.
+
+2️⃣ Écran Principal (Chargement + Résultats)
+
+Après avoir cliqué sur le bouton :
+
+🔄 Jauge animée
+
+Une jauge de progression se remplit automatiquement avec animation fluide :
+
+Changement de couleur progressif :
+
+Cela donne un effet dynamique pendant le chargement des données.
+
+🌐 Appels API en parallèle
+
+L’application effectue des appels API vers OpenWeatherMap pour 5 villes :
+
+Paris
+
+Dakar
+
+New York
+
+Tokyo
+
+London
+
+Les requêtes sont exécutées en parallèle avec Retrofit.
+
+💬 Messages dynamiques
+
+Pendant le chargement, des messages tournent en boucle :
+
+"Nous téléchargeons les données…"
+
+"C’est presque fini…"
+
+"Plus que quelques secondes avant d’avoir le résultat…"
+
+Cela améliore l’expérience utilisateur pendant l’attente.
+
+💥 Affichage des résultats
+
+Une fois la jauge remplie :
+
+👉 Un tableau interactif s’affiche avec :
+
+Température
+
+Description météo
+
+Humidité
+
+Vitesse du vent
+
+Les données sont affichées proprement avec un design moderne.
+
+3️⃣ Page Détail d’une Ville
+
+Quand l’utilisateur clique sur une ville :
+
+Une nouvelle page s’ouvre avec :
+
+Informations détaillées
+
+Température ressentie
+
+Pression atmosphérique
+
+Coordonnées géographiques
+
+📍 Carte Google Maps avec marqueur personnalisé
+
+L’utilisateur peut donc visualiser la position exacte de la ville.
+
+4️⃣ Gestion des erreurs
+
+Si l’API échoue :
+
+Un message d’erreur clair s’affiche
+
+Un bouton "Réessayer" permet de relancer les appels API
+
+Cela évite que l’application ne plante et améliore la robustesse.
+
+5️⃣ Mode Sombre & Mode Clair
+
+L’application supporte :
+
+🌞 Mode clair
+
+🌙 Mode sombre
+
+La bascule est instantanée et le thème change entièrement :
+
+Light Mode
+
+Background : #F0F4FF
+
+Primary : #2196F3
+
+Cards : #FFFFFF
+
+Dark Mode
+
+Background : #0A0E27
+
+Primary : #64B5F6
+
+Cards : #1E2240
+
+6️⃣ Rejouabilité
+
+Une fois la jauge remplie :
+
+Elle se transforme en bouton "Recommencer"
+
+L’utilisateur peut relancer l’expérience
+
+Le bouton retour permet de revenir à l’écran d’accueil
+
+🏗️ Architecture Technique
+
+Nous avons utilisé une architecture MVVM + Clean Architecture pour garantir :
+
+Séparation des responsabilités
+
+Code maintenable
+
+Bonne organisation du projet
+
+Structure principale :
+
+lib/
+core/
+data/
+presentation/
+🧰 Technologies Utilisées
+
+Flutter 3.x
+
+Dart 3.x
+
+Riverpod (gestion d’état)
+
+Dio (client HTTP)
+
+Retrofit (génération API)
+
+Google Maps Flutter
+
+Json Serializable
+
+Animated Text Kit
+
+🌐 API Utilisée
+
+API météo : OpenWeatherMap
+
+Endpoint :
+
+GET https://api.openweathermap.org/data/2.5/weather
+?q={city}&appid={key}&units=metric&lang=fr
+
+Les appels sont effectués en parallèle pour optimiser la performance.
+
+🚀 Installation du Projet
 git clone <Exam_flutter>
 cd Exam_flutter
-```
-
-### 2. Installer les dépendances
-
-```bash
 flutter pub get
-```
-
-### 3. Configurer votre clé API OpenWeatherMap
-
-Obtenez une clé gratuite sur https://openweathermap.org/api
-
-Dans le fichier `lib/data/services/weather_api_service.dart`, remplacez :
-
-```dart
-static const String _apiKey = '21671cbfa9d76491b7976e7d44ff9219';
-```
-
-### 4. Configurer Google Maps
-
-#### Android
-Dans `android/app/src/main/AndroidManifest.xml`, ajoutez dans `<application>` :
-```xml
-<meta-data
-    android:name="com.google.android.geo.API_KEY"
-    android:value="VOTRE_CLE_GOOGLE_MAPS"/>
-```
-
-#### iOS
-Dans `ios/Runner/AppDelegate.swift` :
-```swift
-GMSServices.provideAPIKey("VOTRE_CLE_GOOGLE_MAPS")
-```
-
-### 5. Lancer l'application
-
-```bash
 flutter run
-```
-
----
-
-## 🏗️ Architecture
-
-```
-lib/
-├── main.dart                        
-├── core/
-│   ├── constants/
-│   │   ├── app_colors.dart          
-│   │   ├── app_strings.dart         
-│   │   └── app_theme.dart          
-│   ├── network/
-│   │   ├── api_client.dart         
-│   │   └── network_exceptions.dart  
-│   └── utils/
-│       └── result.dart              
-├── data/
-│   ├── models/
-│   │   ├── weather_model.dart       
-│   │   └── weather_model.g.dart     
-│   ├── repositories/
-│   │   └── weather_repository.dart  
-│   └── services/
-│       ├── weather_api_service.dart 
-│       └── weather_api_service.g.dart
-└── presentation/
-    ├── providers/
-    │   ├── weather_provider.dart    
-    │   └── theme_provider.dart      
-    ├── screens/
-    │   ├── splash_screen.dart
-    │   ├── loading_screen.dart
-    │   ├── results_screen.dart
-    │   └── city_detail_screen.dart
-    └── widgets/
-        ├── animated_gauge.dart      
-        ├── weather_table.dart       
-        ├── city_card.dart           
-        └── error_widget.dart        
-```
-
----
-
-## 📦 Dépendances principales
-
-| Package | Rôle |
-|---------|------|
-| `flutter_riverpod` | State management |
-| `dio` | Client HTTP |
-| `retrofit` | Génération des services API |
-| `google_maps_flutter` | Carte interactive |
-| `animated_text_kit` | Messages rotatifs animés |
-| `google_fonts` | Police Poppins |
-| `json_serializable` | Sérialisation JSON |
-
----
-
-## 🌐 API OpenWeatherMap
-
-Endpoint utilisé :
-```
-GET https://api.openweathermap.org/data/2.5/weather
-    ?q={city}&appid={key}&units=metric&lang=fr
-```
-
-Villes configurées : Paris, Dakar, New York, Tokyo, London
-
----
-
-## 🎨 Design Tokens
-
-### Light Mode
-- Background : `#F0F4FF`
-- Primary : `#2196F3`
-- Cards : `#FFFFFF`
-
-### Dark Mode  
-- Background : `#0A0E27`
-- Primary : `#64B5F6`
-- Cards : `#1E2240`
-
----
-
-## ⚠️ Notes importantes
-
-- Les fichiers `.g.dart` sont pré-générés (pas besoin de `build_runner`)
-- La clé API OpenWeatherMap **doit être remplacée** avant le premier lancement
-- Google Maps nécessite une clé API séparée avec l'API Maps SDK activée
-- Null safety Dart 3.x obligatoire
-
----
-
-## 👨‍💻 Développé avec Flutter 3.x + Dart 3.x
