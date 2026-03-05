@@ -128,7 +128,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                 position: _slide,
                 child: Column(children: [
                   Text(
-                    'WEATHER',
+                    'SEN',
                     style: GoogleFonts.outfit(
                       fontSize: 40,
                       fontWeight: FontWeight.w900,
