@@ -206,7 +206,7 @@ GET https://api.openweathermap.org/data/2.5/weather
 
 Les appels sont effectués en parallèle pour optimiser la performance.
 
-🚀 Installation du Projet
+Installation du Projet
 git clone <Exam_flutter>
 cd Exam_flutter
 flutter pub get
