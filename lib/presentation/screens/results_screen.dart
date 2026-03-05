@@ -23,7 +23,7 @@ class ResultsScreen extends ConsumerWidget {
       backgroundColor: isDark ? AppColors.darkBg : AppColors.lightBg,
       body: CustomScrollView(
         slivers: [
-          // ── AppBar flottant style aurora ──────────────────
+          //AppBar flottant style aurora
           SliverAppBar(
             expandedHeight: 120,
             floating: true,
@@ -84,14 +84,14 @@ class ResultsScreen extends ConsumerWidget {
                 onPressed: () {
                   final cur = ref.read(themeModeProvider);
                   ref.read(themeModeProvider.notifier).state =
-                      cur == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+                  cur == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
                 },
               ),
               const SizedBox(width: 8),
             ],
           ),
 
-          // ── Corps ────────────────────────────────────────
+          //  Corps
           if (state.isLoading && state.weatherList.isEmpty)
             const SliverFillRemaining(
               child: Center(child: CircularProgressIndicator(
@@ -106,69 +106,69 @@ class ResultsScreen extends ConsumerWidget {
               ),
             )
           else ...[
-            if (state.error != null)
-              SliverToBoxAdapter(
-                child: Container(
-                  margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.warning.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                        color: AppColors.warning.withValues(alpha: 0.4)),
-                  ),
-                  child: Row(children: [
-                    const Icon(Icons.warning_amber_rounded,
-                        color: AppColors.warning, size: 16),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        'Chargement partiel : ${state.error}',
-                        style: GoogleFonts.inter(
-                          fontSize: 12, color: AppColors.warning,
+              if (state.error != null)
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: AppColors.warning.withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: AppColors.warning.withValues(alpha: 0.4)),
+                    ),
+                    child: Row(children: [
+                      const Icon(Icons.warning_amber_rounded,
+                          color: AppColors.warning, size: 16),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          'Chargement partiel : ${state.error}',
+                          style: GoogleFonts.inter(
+                            fontSize: 12, color: AppColors.warning,
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
-                ),
-              ),
-
-            // Liste des villes
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (ctx, i) => _AuroraCityTile(
-                    weather: state.weatherList[i],
-                    index: i,
-                    isDark: isDark,
-                    onTap: () {
-                      ref.read(selectedCityProvider.notifier).state =
-                          state.weatherList[i];
-                      Navigator.of(context).push(PageRouteBuilder(
-                        pageBuilder: (_, a, __) => const CityDetailScreen(),
-                        transitionsBuilder: (_, a, __, child) =>
-                            SlideTransition(
-                          position: Tween<Offset>(
-                            begin: const Offset(1, 0), end: Offset.zero,
-                          ).animate(CurvedAnimation(
-                            parent: a, curve: Curves.easeOutCubic,
-                          )),
-                          child: child,
-                        ),
-                        transitionDuration: const Duration(milliseconds: 350),
-                      ));
-                    },
+                    ]),
                   ),
-                  childCount: state.weatherList.length,
+                ),
+
+              // Liste des villes
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                        (ctx, i) => _AuroraCityTile(
+                      weather: state.weatherList[i],
+                      index: i,
+                      isDark: isDark,
+                      onTap: () {
+                        ref.read(selectedCityProvider.notifier).state =
+                        state.weatherList[i];
+                        Navigator.of(context).push(PageRouteBuilder(
+                          pageBuilder: (_, a, __) => const CityDetailScreen(),
+                          transitionsBuilder: (_, a, __, child) =>
+                              SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: const Offset(1, 0), end: Offset.zero,
+                                ).animate(CurvedAnimation(
+                                  parent: a, curve: Curves.easeOutCubic,
+                                )),
+                                child: child,
+                              ),
+                          transitionDuration: const Duration(milliseconds: 350),
+                        ));
+                      },
+                    ),
+                    childCount: state.weatherList.length,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
         ],
       ),
 
-      // FAB recommencer
+      // FAB recommencer → retour à l'accueil (Splash) puis relance
       floatingActionButton: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
@@ -186,12 +186,8 @@ class ResultsScreen extends ConsumerWidget {
         child: FloatingActionButton.extended(
           onPressed: () {
             ref.read(weatherProvider.notifier).reset();
-            Navigator.of(context).pushReplacement(PageRouteBuilder(
-              pageBuilder: (_, a, __) => const LoadingScreen(),
-              transitionsBuilder: (_, a, __, child) =>
-                  FadeTransition(opacity: a, child: child),
-              transitionDuration: const Duration(milliseconds: 400),
-            ));
+            // revient au Splash, respecte le Back du sujet
+            Navigator.of(context).popUntil((route) => route.isFirst);
           },
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -312,7 +308,7 @@ class _AuroraCityTileState extends State<_AuroraCityTile>
                     Image.network(
                       w.iconUrl, width: 56, height: 56,
                       errorBuilder: (_, __, ___) =>
-                          const Icon(Icons.cloud, size: 56),
+                      const Icon(Icons.cloud, size: 56),
                     ),
                     const SizedBox(width: 14),
 

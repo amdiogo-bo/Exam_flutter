@@ -40,9 +40,7 @@ class WeatherState {
       isComplete: isComplete ?? this.isComplete,
     );
   }
-} // ← accolade fermante de WeatherState
-
-// ─── NOTIFIER ─────────────────────────────────────────────
+}
 
 /// Notifier principal pour la météo
 class WeatherNotifier extends StateNotifier<WeatherState> {
@@ -101,7 +99,7 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
         isLoading: false,
         isComplete: true,
         progress: 1.0,
-        error: lastError, // erreur partielle si certaines villes ont échoué
+        error: lastError,
       );
     }
   }
@@ -116,9 +114,8 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
   void reset() {
     state = const WeatherState();
   }
-} // ← accolade fermante de WeatherNotifier
+}
 
-// ─── PROVIDERS ────────────────────────────────────────────
 
 /// Provider principal pour la météo
 final weatherProvider =

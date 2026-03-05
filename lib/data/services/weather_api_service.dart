@@ -16,19 +16,19 @@ abstract class WeatherApiService {
   /// Récupère la météo d'une ville par son nom
   @GET('weather')
   Future<Map<String, dynamic>> getWeatherByCity(
-    @Query('q') String cityName,
-    @Query('appid') String apiKey,
-    @Query('units') String units,
-    @Query('lang') String lang,
-  );
+      @Query('q') String cityName,
+      @Query('appid') String apiKey,
+      @Query('units') String units,
+      @Query('lang') String lang,
+      );
 }
 
 /// Wrapper pour utiliser le service avec gestion d'erreurs
 class WeatherApiClient {
   final WeatherApiService _service;
 
-  // ⚠️ Remplacez cette clé par votre clé API OpenWeatherMap
-  static const String _apiKey = 'VOTRE_CLE_API_OPENWEATHERMAP';
+  //  Clé API OpenWeatherMap
+  static const String _apiKey = '21671cbfa9d76491b7976e7d44ff9219';
   static const String _units = 'metric';
   static const String _lang = 'fr';
 

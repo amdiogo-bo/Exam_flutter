@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'weather_model.g.dart';
 
 /// Modèle de données météo pour une ville

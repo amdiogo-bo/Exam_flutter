@@ -41,8 +41,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     super.dispose();
   }
 
+  //le bouton Back Android ramène à l'accueil
   void _go() {
-    Navigator.of(context).pushReplacement(PageRouteBuilder(
+    Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (_, a, __) => const LoadingScreen(),
       transitionsBuilder: (_, a, __, child) =>
           FadeTransition(opacity: a, child: child),
@@ -57,7 +58,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
     return Scaffold(
       body: Stack(children: [
-        // ── Fond aurora animé ──────────────────────────────
+        //FOND aurora animé
         AnimatedBuilder(
           animation: _bgCtrl,
           builder: (_, __) => Container(
@@ -307,10 +308,3 @@ class _AuroraBgPainter extends CustomPainter {
   bool shouldRepaint(_AuroraBgPainter o) => o.t != t;
 }
 
-extension _ToggleExt on WidgetRef {
-  void toggleTheme() {
-    final cur = read(themeModeProvider);
-    read(themeModeProvider.notifier).state =
-        cur == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
-  }
-}

@@ -41,7 +41,8 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen>
   void _navigateToResults() {
     if (_hasNavigated) return;
     _hasNavigated = true;
-    Navigator.of(context).pushReplacement(PageRouteBuilder(
+    // le bouton Back depuis Results ramène au Splash
+    Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (_, a, __) => const ResultsScreen(),
       transitionsBuilder: (_, a, __, child) =>
           FadeTransition(opacity: a, child: child),
@@ -81,7 +82,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen>
         )
             : SafeArea(
           child: Column(children: [
-            // ── Header ────────────────────────────────
+            //  Header
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: Row(children: [
@@ -104,7 +105,7 @@ class _LoadingScreenState extends ConsumerState<LoadingScreen>
 
             const Spacer(),
 
-            // ── Jauge ────────────────────────────────
+            //  Jauge
             AnimatedGauge(
               progress: state.progress,
               size: 220,

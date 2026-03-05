@@ -34,7 +34,7 @@ class _CityDetailScreenState extends ConsumerState<CityDetailScreen> {
     return Scaffold(
       backgroundColor: isDark ? AppColors.darkBg : AppColors.lightBg,
       body: CustomScrollView(slivers: [
-        // ── AppBar colorée ───────────────────────────────
+        // AppBar colorée
         SliverAppBar(
           expandedHeight: 220,
           pinned: true,
@@ -68,7 +68,7 @@ class _CityDetailScreenState extends ConsumerState<CityDetailScreen> {
                       child: Image.network(
                         city.iconUrl, width: 80, height: 80,
                         errorBuilder: (_, __, ___) =>
-                            const Icon(Icons.cloud, size: 80, color: Colors.white),
+                        const Icon(Icons.cloud, size: 80, color: Colors.white),
                       ),
                     ),
                     Text(
@@ -106,7 +106,7 @@ class _CityDetailScreenState extends ConsumerState<CityDetailScreen> {
           ),
         ),
 
-        // ── Corps ────────────────────────────────────────
+
         SliverPadding(
           padding: const EdgeInsets.all(16),
           sliver: SliverList(delegate: SliverChildListDelegate([
@@ -128,7 +128,7 @@ class _CityDetailScreenState extends ConsumerState<CityDetailScreen> {
   }
 }
 
-// ── Grille des infos météo ──────────────────────────────
+// Grille des infos météo
 class _InfoGrid extends StatelessWidget {
   final WeatherModel city;
   final bool isDark;
@@ -235,7 +235,7 @@ class _InfoTile extends StatelessWidget {
   }
 }
 
-// ── Carte soleil ────────────────────────────────────────
+//  Carte soleil
 class _SunCard extends StatelessWidget {
   final WeatherModel city;
   final bool isDark;
@@ -287,7 +287,7 @@ class _SunCard extends StatelessWidget {
   }
 }
 
-// ── Carte OpenStreetMap ─────────────────────────────────
+//  Carte OpenStreetMap
 class _MapCard extends StatelessWidget {
   final WeatherModel city;
   final MapController mapCtrl;
